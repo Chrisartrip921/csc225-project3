@@ -10,3 +10,9 @@ body{
 .hover-background-gray:hover {
     background: lightgray;
 }
+
+.centerCard {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
