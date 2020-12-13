@@ -1,0 +1,12 @@
+/*
+body{
+    background-color: black;
+}
+*/
+.cursor-pointer {
+    cursor: pointer;
+}
+  
+.hover-background-gray:hover {
+    background: lightgray;
+}
