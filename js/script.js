@@ -1,13 +1,15 @@
 jQuery(document).ready(function($){
     
     const aRequest = axios.get('http://csc225.mockable.io/consoles');
-    
+    $('#consoles').html("Loading...");
+
     aRequest.then(function(load){
+        
         console.log(load);
         const consoles = load.data;
         const consolesHtml = consoles.map(function(cnsle){
             const { id, name, image } = cnsle;
-                
+            
             return `
             
                 <div data-id="${id}" class="media my-5 hover-background-gray cursor-pointer">
@@ -34,8 +36,13 @@ jQuery(document).ready(function($){
         const id = $(this).attr('data-id');
         
         const cnsleUrl = `http://csc225.mockable.io/consoles/${id}`;
+        $('#console').html("");
+        $('#loading-animation').toggleClass('d-none');
         axios.get(cnsleUrl).then(function(load){
-            const { id, name, image } = load.data;
+            
+            $('#loading-animation').toggleClass('d-none');
+            const { id, name, image, country, releaseYear, price } = load.data;
+            
             $('#console').html(
                 `
                 
@@ -43,7 +50,7 @@ jQuery(document).ready(function($){
                     <img src="${image}" class="card-img-top" alt="image of ${name}">
                     <div class="card-body">
                         <h5 class="card-title">${name}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">${name} was released in ${country} in the year ${releaseYear} with a retail price of $${price}.99</p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
@@ -60,3 +67,4 @@ jQuery(document).ready(function($){
 
 
 });
+
