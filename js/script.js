@@ -1,15 +1,15 @@
 jQuery(document).ready(function($){
-    
+    $('#loading-animation').toggleClass('d-none');
     const aRequest = axios.get('http://csc225.mockable.io/consoles');
-    $('#consoles').html("Loading...");
-
+    
+    
     aRequest.then(function(load){
         
         console.log(load);
         const consoles = load.data;
         const consolesHtml = consoles.map(function(cnsle){
             const { id, name, image } = cnsle;
-            
+            $('#loading-animation').hide();
             return `
             
                 <div data-id="${id}" class="media my-5 hover-background-gray cursor-pointer">
@@ -37,10 +37,10 @@ jQuery(document).ready(function($){
         
         const cnsleUrl = `http://csc225.mockable.io/consoles/${id}`;
         $('#console').html("");
-        $('#loading-animation').toggleClass('d-none');
+        $('#loading-animation2').toggleClass('d-none');
         axios.get(cnsleUrl).then(function(load){
             
-            $('#loading-animation').toggleClass('d-none');
+            $('#loading-animation2').toggleClass('d-none');
             const { id, name, image, country, releaseYear, price } = load.data;
             
             $('#console').html(
